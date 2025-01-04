@@ -1,4 +1,4 @@
-module chatserviceprotos
+module github.com/DIYORBEKORIFJONOV/chat_service_protos
 
 go 1.23.1
 
