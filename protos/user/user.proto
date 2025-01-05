@@ -54,7 +54,7 @@ message LoginUserRequest {
 }
 
 message LoginUserResponse {
-    string token = 1;
+    string success = 1;
 }
 
 message GetUserRequest {
