@@ -31,7 +31,8 @@ message UpdateUserRequest {
     string phone = 3;
     string status = 4;
     string profile_picture_url = 5;
-    string language = 6; 
+    string language = 6;
+    string last_login = 7;
 }
 
 message CreateUserRequest {
