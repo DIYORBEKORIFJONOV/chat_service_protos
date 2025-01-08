@@ -1,0 +1,111 @@
+syntax = "proto3";
+
+option go_package = "diyorbek.user.v1;chatgen";
+
+
+service ChatService {
+    rpc CreateChat(CreateChatRequest) returns (CreateChatResponse);
+    rpc SendMessage(stream SendMessageRequest) returns (stream MessageResponse);
+    rpc GetChatHistory(GetChatHistoryRequest) returns (GetChatHistoryResponse);
+    rpc GetChatParticipants(GetChatParticipantsRequest) returns (GetChatParticipantsResponse);
+    rpc AddParticipant(AddParticipantRequest) returns (AddParticipantResponse);
+    rpc RemoveParticipant(RemoveParticipantRequest) returns (RemoveParticipantResponse);
+    rpc GetMessageStatus(GetMessageStatusRequest) returns (MessageStatusResponse);
+    rpc DeleteMessage(DeleteMessageRequest) returns (DeleteMessageResponse);
+    rpc AddAdmin(AddAdminRequest) returns (AddAdminResponse);
+}
+
+
+message CreateChatRequest {
+    string user_id = 1;
+    repeated string participants = 2;
+    string status = 3;
+}
+
+message CreateChatResponse {
+    string chat_id = 1;
+}
+
+message SendMessageRequest {
+    string chat_id = 1;
+    string sender_id = 2;
+    string recipient_id = 3;
+    string message = 4;
+}
+
+message MessageResponse {
+    string message_id = 1;
+    string sender_id = 2;
+    string recipient_id = 3;
+    string message = 4;
+    string timestamp = 5;
+}
+
+message GetChatHistoryRequest {
+    string chat_id = 1;
+    string user_id = 2;
+    int32 page = 3;
+}
+
+message GetChatHistoryResponse {
+    repeated MessageResponse messages = 1;
+}
+
+message GetChatParticipantsRequest {
+    string chat_id = 1;
+    string user_id = 2;
+}
+
+message GetChatParticipantsResponse {
+    repeated string user_ids = 1;
+}
+
+message AddParticipantRequest {
+    string chat_id = 1;
+    string user_id = 2;
+    string adder_id = 3;
+}
+
+message AddParticipantResponse {
+    bool succses = 1;
+}
+
+message RemoveParticipantRequest {
+    string chat_id = 1;
+    string user_id = 2;
+    string remover_id = 3;
+}
+
+message RemoveParticipantResponse {
+    bool succsess  = 1;
+}
+
+message GetMessageStatusRequest {
+    string chat_id = 1;
+    string message_id = 2;
+    string sender_id = 3;
+}
+
+message MessageStatusResponse {
+    string message_id = 1;
+    string status = 2;
+}
+
+message DeleteMessageRequest {
+    string chat_id = 1;
+    string message_id = 2;
+    string sender_id = 3;
+}
+
+message DeleteMessageResponse {
+    bool success  = 1;
+}
+
+message AddAdminRequest {
+    string chat_id = 1;
+    string adder_id = 2;
+}
+
+message AddAdminResponse {
+    bool succses = 1;
+}
